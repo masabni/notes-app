@@ -26,6 +26,12 @@
 
    Now edit the *.env* file and change the DB variables, please note that you need to set the DB_HOST to mysql if you're using sail
 
+4. Install the dependencies with composer
+
+    ```
+    composer install
+    ```
+
 4. Start Laravel Sail. The first time you run the Sail up command, Sail's application containers will be built on your machine. This could take several minutes. Don't worry, subsequent attempts to start Sail will be much faster (make sure that the ports 80 & 3306 are not used, otherwise you should change APP_PORT & FORWARD_DB_PORT in .env file respectively):
 
     ```
