@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\CommentsController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\NotesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +16,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', [HomeController::class, 'home'])->name('home');
+
+Route::group(['middleware' => ['auth']], function () {
+    Route::resource('notes', NotesController::class)
+        ->middleware('auth')
+        ->except(['show', 'edit', 'update']);
+
+    Route::post('notes/{note}/comments', [CommentsController::class, 'store'])->name('comments.store');
 });
+
+Route::get('/notes/{note}', [NotesController::class, 'show'])->name('notes.show');
+
+require __DIR__.'/auth.php';

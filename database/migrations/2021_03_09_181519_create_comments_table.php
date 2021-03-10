@@ -15,6 +15,9 @@ class CreateCommentsTable extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->index('user_id')->constrained();
+            $table->foreignUuid('note_id')->index('note_id')->constrained();
+            $table->text('comment');
             $table->timestamps();
         });
     }

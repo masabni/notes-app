@@ -14,7 +14,11 @@ class CreateNotesTable extends Migration
     public function up()
     {
         Schema::create('notes', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
+            $table->foreignId('user_id')->index('user_id')->constrained();
+            $table->string('title', 191);
+            $table->text('content')->nullable();
+            $table->char('published', 1)->default('1');
             $table->timestamps();
         });
     }
@@ -26,6 +30,8 @@ class CreateNotesTable extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('notes');
+        Schema::enableForeignKeyConstraints();
     }
 }
