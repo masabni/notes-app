@@ -26,10 +26,10 @@
 
    Now edit the *.env* file and change the DB variables, please note that you need to set the DB_HOST to mysql if you're using sail
 
-4. Start Laravel Sail. The first time you run the Sail up command, Sail's application containers will be built on your machine. This could take several minutes. Don't worry, subsequent attempts to start Sail will be much faster:
+4. Start Laravel Sail. The first time you run the Sail up command, Sail's application containers will be built on your machine. This could take several minutes. Don't worry, subsequent attempts to start Sail will be much faster (make sure that the ports 80 & 3306 are not used, otherwise you should change APP_PORT & FORWARD_DB_PORT in .env file respectively):
 
     ```
-    ./vendor/bin/sail up
+    ./vendor/bin/sail up -d
     ```
 
 5. Generate app key:
@@ -44,7 +44,7 @@
     ./vendor/bin/sail artisan migrate --seed
     ```
 
-This will run the app on [http://localhost](http://localhost)
+Now you can visit the app on [http://localhost](http://localhost) or localhost:{APP_PORT}.
 
 #### Install With Composer (PHP ^7.3|^8.0):
 1. Install this code on your local system:
